@@ -13,25 +13,25 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         try {
-                    if (Auth::attempt($request->only('email','password'))) {
-            $user   = Auth::user();
-            $token  = $user->createToken('app')->accessToken;
+            if (Auth::attempt($request->only('email', 'password'))) {
+                $user   = Auth::user();
+                $token  = $user->createToken('app')->accessToken;
 
-            return response([
-                'message'   =>  'SuccessFully Login',
-                'token'     =>  $token,
-                'user'      =>  $user
-            ], 400);
-        }
+                return response([
+                    'message'   =>  'SuccessFully Login',
+                    'token'     =>  $token,
+                    'user'      =>  $user
+                ], 200);
+            }
         } catch (\Throwable $th) {
             return response([
                 'message'   => $th->getMessage()
-            ],400);
+            ], 400);
         }
 
         return response([
             'message'   =>  'Invalid Email Or Password'
-        ],401);
+        ], 401);
     }
 
     public function register(RegisterRequest $request)
@@ -49,14 +49,13 @@ class AuthController extends Controller
                 'message'   =>  'SuccessFully Registration',
                 'token'     =>  $token,
                 'user'      =>  $user
-            ],400);
+            ], 200);
         } catch (\Throwable $th) {
             return response([
                 'message'   =>  'SuccessFully Registration',
                 'token'     =>  $token,
                 'user'      =>  $user
-            ],401);
+            ], 401);
         }
-
     }
 }

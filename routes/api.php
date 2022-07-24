@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{
+    AuthController,
+    UserController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +25,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login',[AuthController::class, 'login'])->name('auth.login');
 Route::post('/register',[AuthController::class, 'register'])->name('auth.register');
+
 Route::post('/forgot-password',[ForgotController::class, 'forgotPassword'])->name('forgot_password');
 Route::post('/reset-password',[ForgotController::class, 'resetPassword'])->name('reset_password');
+
+// curren users
+Route::get('/users',[UserController::class, 'user'])->middleware('auth:api');
