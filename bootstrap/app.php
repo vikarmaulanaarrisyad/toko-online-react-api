@@ -11,6 +11,10 @@
 |
 */
 
+header('Access-Control-Allowed-Origin:*');
+header('Access-Control-Allowed-Methods:*');
+header('Access-Control-Allowed-Headers:*');
+
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
